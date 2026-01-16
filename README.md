@@ -42,6 +42,7 @@ The balance is a value that will not change very often, and a 1 minute polling i
 ### /price
 blockchain.info provides multiple apis for cryptocurrencies.
 A GET call on `https://blockchain.info/tobtc?currency=USD&value=100000` will give us a conversion value without any useless information around. I'm using 100,000 USD for value to reduce rounding errors.
+Unfortunately, it seems like this API caches the current price of BTC for a long time (about ~1 min), so we will not see changes ocurring every second.
 
 ### /balance
 Connecting to an actual Bitcoin wallet is out of the scope of this exercise, so this part will be mocked up, returning a random float value between 0.001 and 1, with a delay of 500ms to simulate real life external api call.
@@ -53,8 +54,9 @@ Connecting to an actual Bitcoin wallet is out of the scope of this exercise, so 
 The backend will be a simple Bottle app. Give the low complexity of the APIs involved, all endpoints will be defined in a single file
 
 ### Frontend
+The frontend is a basic Vite setup, with a main App file and components in their own dedicated files.
+Again, given the complexity, there is no need to over complicate the architecture.
 
 ## What would I do if I had more time?
 ### Tests
 ### Prepare for scale
-### Mobile compatibility and responsiveness

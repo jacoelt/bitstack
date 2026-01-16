@@ -1,10 +1,11 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import RefreshIcon from '@mui/icons-material/Refresh';
 
 const BALANCE_API_PATH = "/balance";
+const REFRESH_INTERVAL = 60; // in seconds
 
-export function Balance() {
+export function Balance({ currentPrice }: { currentPrice?: number }) {
     const [amount, setAmount] = useState<number | null>(null);
     const [lastFetchTime, setLastFetchTime] = useState<Date | null>(null);
 
@@ -19,8 +20,10 @@ export function Balance() {
     }
 
     useEffect(() => {
+        // Called twice in strict mode in dev env, but that's fine
         fetchBalance();
-        setInterval(fetchBalance, 60000);
+        const interval = setInterval(fetchBalance, REFRESH_INTERVAL * 1000);
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -29,7 +32,14 @@ export function Balance() {
                 Current Balance
             </Typography>
             <Typography variant="h4" color="primary">
-                {amount !== null ? `$${amount.toFixed(2)}` : 'Loading...'}
+                {amount !== null ? <>
+                    {`BTC ${amount.toFixed(8)}`}
+                    {currentPrice !== undefined && (
+                        <Typography variant="caption" display="block">
+                            (≈ ${(amount * currentPrice).toFixed(2)} USD)
+                        </Typography>
+                    )}
+                </> : <CircularProgress />}
             </Typography>
             {lastFetchTime && (
                 <Typography variant="caption" display="block" sx={{ mt: 1 }}>
