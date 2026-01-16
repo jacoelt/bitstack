@@ -7,6 +7,7 @@ const REFRESH_INTERVAL = 60; // in seconds
 
 export function Balance({ currentPrice }: { currentPrice?: number }) {
     const [amount, setAmount] = useState<number | null>(null);
+    const [error, setError] = useState<string | null>(null);
     const [lastFetchTime, setLastFetchTime] = useState<Date | null>(null);
 
     function fetchBalance() {
@@ -16,6 +17,11 @@ export function Balance({ currentPrice }: { currentPrice?: number }) {
             .then((data) => {
                 setAmount(data.balance);
                 setLastFetchTime(new Date());
+                setError(null);
+            })
+            .catch((err) => {
+                setError("Failed to fetch balance");
+                console.error(err);
             });
     }
 
@@ -32,6 +38,7 @@ export function Balance({ currentPrice }: { currentPrice?: number }) {
                 Current Balance
             </Typography>
             <Typography variant="h4" color="primary">
+                {error ? <Typography color="error">{error}</Typography> : null}
                 {amount !== null ? <>
                     {`BTC ${amount.toFixed(8)}`}
                     {currentPrice !== undefined && (
