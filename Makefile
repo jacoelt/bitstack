@@ -11,4 +11,4 @@ runback:
 
 runfront:
 	@echo "Starting frontend server..."
-	cd frontend && npm start &
+	cd frontend && npm run dev &
