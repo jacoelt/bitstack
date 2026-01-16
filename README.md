@@ -1,5 +1,7 @@
 # Bitstack take home challenge
 
+Total time spent: ~2.5 h
+
 ## How to run
 Install Python 3.11 with pip, npm 11 and Node 22.
 If you would like to use a virtual environment for Python, activate it. Otherwise, the packages will be installed in your root Python path.
