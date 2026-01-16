@@ -7,7 +7,7 @@ run: runfront runback
 
 runback:
 	@echo "Starting backend server..."
-	cd backend && python app.py &
+	cd backend && python main.py &
 
 runfront:
 	@echo "Starting frontend server..."

@@ -2,18 +2,31 @@
 
 ## How to run
 Install Python 3.11, npm 11 and Node 22.
-If you would like to use a virtual environment for Python, activate it. Otherwise, the packages will be installed in your root Python path. Only 1 package will be installed.
+If you would like to use a virtual environment for Python, activate it. Otherwise, the packages will be installed in your root Python path.
+
+### If `make` is available:
 Run `make install` to install the required dependencies.
 Run `make run` to start the frontend and backend services
-Navigate to <http://localhost:5173/>(http://localhost:5173/)
+Navigate to [http://localhost:5173/](http://localhost:5173/)
 
 If you want to only run the frontend, use `make runfront`
 If you want to only run the backend, use `make runback`
 
+### Otherwise, run manually
+To install dependencies, run the following commands
+```
+cd backend
+pip install -r requirements
+cd ..
+cd frontend
+npm install
+```
+
+
 ## Technologies
 
 No need for a complex api system, nor a complex UI here.
-<Bottle>(https://bottlepy.org/docs/dev/) is perfect for this kind of usecase for the backend, and a simple React app will do just fine for the front.
+[Bottle](https://bottlepy.org/docs/dev/) is perfect for this kind of usecase for the backend, and a simple React app will do just fine for the front.
 They are both easy to setup and easy to run.
 
 ## Technical tradeoffs
@@ -31,7 +44,7 @@ blockchain.info provides multiple apis for cryptocurrencies.
 A GET call on `https://blockchain.info/tobtc?currency=USD&value=100000` will give us a conversion value without any useless information around. I'm using 100,000 USD for value to reduce rounding errors.
 
 ### /balance
-Connecting to an actuall Bitcoin wallet is out of the scope of this exercise, so this part will be mocked up, returning a random float value between 0.001 and 1, with a delay of 500ms to simulate real life external api call.
+Connecting to an actual Bitcoin wallet is out of the scope of this exercise, so this part will be mocked up, returning a random float value between 0.001 and 1, with a delay of 500ms to simulate real life external api call.
 
 
 ## Architecture
